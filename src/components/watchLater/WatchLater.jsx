@@ -5,7 +5,6 @@ import YouTube from "react-youtube";
 
 export function WatchLater() {
   const { state, dispatch } = useDataContext();
-  console.log(state);
 
   return (
     <>
@@ -14,7 +13,7 @@ export function WatchLater() {
         {state.watchLater.map((item) => (
           <div>
             <YouTube
-              videoId={item.id}
+              videoId={item.youtubeId}
               onPlay={() => dispatch({ type: `ADD_TO_HISTORY`, payload: item })}
               className="videos-history"
             />

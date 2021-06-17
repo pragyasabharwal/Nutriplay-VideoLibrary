@@ -3,61 +3,62 @@ import YouTube from 'react-youtube'
 import './VideoPlay.css'
 import { useDataContext } from '../context/DataContext'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { PlaylistModal } from '../playlistmodal/PlaylistModal'
 import { useAuth } from '../context/AuthProvider'
 import { LoginModal } from '../modal/LoginModal'
 import axios from 'axios'
 import { REACT_APP_BASE_URL } from '../../utils/server'
-import { addToHistory, removeFromLiked } from '../../services/videosServices'
+import {
+  addToHistory,
+  removeFromLiked,
+  addToSaved,
+  removeFromSaved,
+  setLikedVideos,
+  setSavedVideos,
+} from '../../services/videosServices'
 import { addToLiked } from '../../services/videosServices'
 
 export function VideoPlay() {
   // const [input, setInput] = useState("");
   // const [notes, setNotes] = useState([]);
-  const { dispatch, state, modal, setModal } = useDataContext()
+  const {
+    dispatch,
+    state,
+    modal,
+    setModal,
+    data,
+    allData,
+    setData,
+  } = useDataContext()
   const navigate = useNavigate()
   const { login } = useAuth()
   let { videoId } = useParams()
-  const [data, setData] = useState()
-  const [allData, setAllData] = useState()
 
   useEffect(() => {
     ;(async function () {
-      const res = await axios.get(`${REACT_APP_BASE_URL}/videos`)
-      setAllData(res.data.videos)
-    })()
-  }, [])
-
-  useEffect(() => {
-    ;(async function () {
-      console.log('check')
       const res = await axios.get(`${REACT_APP_BASE_URL}/videos/${videoId}`)
       setData(res.data.video)
     })()
   }, [videoId])
 
-  useEffect(() => {
-    state.liked = []
-    ;(async function () {
-      console.log('hi')
-      const {
-        status,
-        data: { liked },
-      } = await axios.get(`${REACT_APP_BASE_URL}/liked`)
-      if (status === 200) {
-        dispatch({ type: 'SET_LIKED_VIDEOS', payload: liked })
-      }
-    })()
-  }, [])
-
-  console.log(state.liked)
-
-  function apiHandler(item, dispatch) {
+  function likeApiHandler(item, dispatch) {
     state.liked.find((prev) => prev._id === item._id)
       ? removeFromLiked(item, dispatch)
       : addToLiked(item, dispatch)
   }
+
+  function saveApiHandler(item, dispatch) {
+    state?.saved.find((prev) => prev?._id === item?._id)
+      ? removeFromSaved(item, dispatch)
+      : addToSaved(item, dispatch)
+  }
+
+  useEffect(() => {
+    setLikedVideos(dispatch)
+    setSavedVideos(dispatch)
+  }, [])
+
 
   return data ? (
     data.map((item) => {
@@ -93,10 +94,10 @@ export function VideoPlay() {
                     <i
                       className="fas fa-thumbs-up like padding-1"
                       onClick={() =>
-                        login ? apiHandler(item, dispatch) : setModal(true)
+                        login ? likeApiHandler(item, dispatch) : setModal(true)
                       }
                       style={
-                        state.liked.find((prev) => prev._id === item._id)
+                        state?.liked.find((prev) => prev?._id === item?._id)
                           ? { color: 'red' }
                           : {}
                       }
@@ -106,12 +107,12 @@ export function VideoPlay() {
                     <i
                       className="fas fa-bookmark save"
                       onClick={() =>
-                        login
-                          ? dispatch({ type: 'TOGGLE_SAVE', payload: item })
-                          : setModal(true)
+                        login ? saveApiHandler(item, dispatch) : setModal(true)
                       }
                       style={
-                        state.saved.includes(item) ? { color: 'red' } : null
+                        state?.saved.find((prev) => prev?._id === item?._id)
+                          ? { color: 'red' }
+                          : {}
                       }
                     ></i>
                   </span>
@@ -143,8 +144,8 @@ export function VideoPlay() {
             </div>
             <div className="relative">
               <div className="v">
-                {allData ? (
-                  allData.map((items) => {
+                {state.videos.length > 0 &&
+                  state.videos.map((items) => {
                     if (items._id !== videoId) {
                       return (
                         <div className="video-style-1">
@@ -178,12 +179,7 @@ export function VideoPlay() {
                         </div>
                       )
                     }
-                  })
-                ) : (
-                  <div className="spinner">
-                    <ClipLoader color={'black'} size={50} />
-                  </div>
-                )}{' '}
+                  })}
               </div>
             </div>
           </div>

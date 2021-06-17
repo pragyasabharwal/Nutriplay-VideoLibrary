@@ -26,7 +26,6 @@ export const Signup = () => {
         },
       });
       if (res.status === 200) {
-        console.log(res);
         setError(res.data.message);
       }
     } catch (err) {

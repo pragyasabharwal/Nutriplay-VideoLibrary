@@ -1,8 +1,15 @@
-import { useDataContext } from "../components/context/DataContext";
-import YouTube from "react-youtube";
+import { useDataContext } from '../components/context/DataContext'
+import YouTube from 'react-youtube'
+import { useEffect } from 'react'
+import { setLikedVideos } from '../services/videosServices'
 
 export function LikedVideos() {
-  const { state, dispatch } = useDataContext();
+  const { state, dispatch } = useDataContext()
+
+  useEffect(() => {
+    state.liked = []
+    setLikedVideos(dispatch)
+  }, [])
 
   return (
     <>
@@ -19,5 +26,5 @@ export function LikedVideos() {
         ))}
       </div>
     </>
-  );
+  )
 }

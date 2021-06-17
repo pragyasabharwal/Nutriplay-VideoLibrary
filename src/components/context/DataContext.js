@@ -8,6 +8,7 @@ import { useEffect } from 'react'
 const DataContext = createContext()
 
 const initialState = {
+  videos: [],
   watchLater: [],
   liked: [],
   saved: [],
@@ -23,22 +24,21 @@ const initialState = {
 export function DataProvider({ children }) {
   const [modal, setModal] = useState(false)
   const [state, dispatch] = useReducer(reducer, initialState)
+  const [data, setData] = useState()
 
   useEffect(() => {
-    ;(async function () {
-      console.log('hi')
-      const {
-        status,
-        data: { liked },
-      } = await axios.get(`${REACT_APP_BASE_URL}/liked`)
-      if (status === 200) {
-        dispatch({ type: 'SET_LIKED_VIDEOS', payload: liked })
-      }
-    })()
+    setAllVideos()
   }, [])
 
+  async function setAllVideos() {
+    const res = await axios.get(`${REACT_APP_BASE_URL}/videos`)
+    if (res.status === 200) {
+      dispatch({ type: 'INITIALIZE_ALL_VIDEOS', payload: res.data.videos })
+    }
+  }
+
   return (
-    <DataContext.Provider value={{ dispatch, state, modal, setModal }}>
+    <DataContext.Provider value={{ dispatch, state, modal, setModal, data, setData }}>
       {children}
     </DataContext.Provider>
   )

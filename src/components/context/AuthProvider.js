@@ -34,7 +34,6 @@ export const AuthProvider = ({ children }) => {
   token && setupAuthHeaderForServiceCalls(token);
 
   const loginUser = async (req, res) => {
-    console.log('working')
     try {
       const res = await axios.post('https://backend-nutriplay.pragyasabharwal.repl.co/login', {
         user: {
@@ -43,7 +42,6 @@ export const AuthProvider = ({ children }) => {
         },
       });
       if (res.status === 200) {
-        console.log('successful')
         localStorage?.setItem(
           "login",
           JSON.stringify({ isUserLoggedIn: true, token: res.data.token })

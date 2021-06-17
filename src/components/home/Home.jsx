@@ -1,27 +1,13 @@
 import "./Home.css";
 import { useDataContext } from "../context/DataContext";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useAuth } from "../context/AuthProvider";
 import { LoginModal } from "../modal/LoginModal";
-import { REACT_APP_BASE_URL } from "../../utils/server";
 
 export function Home() {
-  const [data, setData] = useState();
   const { login } = useAuth();
-  const { setModal, modal } = useDataContext();
-
-  useEffect(() => {
-    (async function () {
-      const res = await axios.get(`${REACT_APP_BASE_URL}/videos`);
-      console.log(res);
-      setData(res.data.videos);
-    })();
-  }, []);
-
-  const { dispatch, state } = useDataContext();
+  const { setModal, modal, dispatch, state } = useDataContext();
 
   return (
     <div>
@@ -34,8 +20,8 @@ export function Home() {
             : { marginLeft: "unset", transition: "350ms" }
         }
       >
-        {data ? (
-          data?.map((item) => (
+        {state.videos.length > 0  ? (
+          state.videos?.map((item) => (
             <div className="video-style" key={item._id}>
               <Link to={`videos/${item._id}`}>
                 <div className="videos">

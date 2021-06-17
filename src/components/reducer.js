@@ -33,6 +33,8 @@ export const reducer = (state, action) => {
       }
     case 'TOGGLE_NAV':
       return { ...state, displayNav: !state.displayNav }
+    case 'INITIALIZE_ALL_VIDEOS':
+      return { ...state, videos: state.videos.concat(action.payload) }
     case 'ADD_TO_LIKED':
       return {
         ...state,
@@ -41,19 +43,27 @@ export const reducer = (state, action) => {
     case 'REMOVE_FROM_LIKED':
       return {
         ...state,
-        liked: state.liked.filter( prev => prev._id !== action.payload._id ),
+        liked: state.liked.filter((prev) => prev._id !== action.payload._id),
       }
     case 'SET_LIKED_VIDEOS':
       return {
         ...state,
         liked: state.liked.concat(action.payload),
       }
-    case 'TOGGLE_SAVE':
+    case 'SET_SAVED_VIDEOS':
       return {
         ...state,
-        saved: state.saved.includes(action.payload)
-          ? state.saved.filter((prev) => prev !== action.payload)
-          : state.saved.concat(action.payload),
+        saved: state.saved.concat(action.payload),
+      }
+    case 'ADD_TO_SAVED':
+      return {
+        ...state,
+        saved: state.saved.concat(action.payload),
+      }
+    case 'REMOVE_FROM_SAVED':
+      return {
+        ...state,
+        saved: state.saved.filter((prev) => prev?._id !== action.payload?._id),
       }
     case 'ADD_TO_PLAYLIST':
       return {

@@ -1,0 +1,40 @@
+.history-library-div {
+    margin-top: 5em;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--gray-fade);
+    padding-bottom: 0.5em;
+
+}
+
+.videos-history-library {
+    width: 18em;
+    height: 10em;
+    padding: 1em;
+}
+
+.title-history-library {
+    font-size: 1.2em;
+    margin-top: 3em;
+    align-self: flex-start;
+    margin-left: 15em;
+}
+
+.history-library {
+    display: flex;
+    justify-content: center;
+    display: flex;
+    margin-left: 4em;
+    flex-wrap: wrap;
+
+}
+
+.history-library-div-1 {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--gray-fade);
+    padding-bottom: 1em;
+
+
+}

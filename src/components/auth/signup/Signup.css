@@ -1,0 +1,156 @@
+.user-input-wrp-1 {
+    position: relative;
+    width: 90%;
+    max-width: 20em;
+    font-family: 'Poppins', sans-serif;
+}
+
+.user-input-wrp-1 .inputText-1 {
+    width: 100%;
+    border-radius: 0.3em;
+    box-shadow: none !important;
+    padding: 1em;
+    border: none;
+    width: 15em;
+    margin: 1em;
+    background-color: rgba(128, 128, 128, 0.075);
+}
+
+
+.user-input-wrp-1 .floating-label-1 {
+    position: absolute;
+    pointer-events: none;
+    top: 43px;
+    left: 25px;
+    font-size: 1em;
+    transition: 0.2s ease all;
+    color: gray;
+}
+
+.floating-label-password-1 {
+    position: absolute;
+    pointer-events: none;
+    top: 43px;
+    left: 25px;
+    font-size: 1em;
+    transition: 0.2s ease all;
+    color: gray;
+
+}
+
+.user-input-wrp-1 input:focus~.floating-label-1,
+.user-input-wrp-1 input:not(:focus):valid~.floating-label-1 {
+    top: 5px;
+    left: 15px;
+    opacity: 1;
+}
+
+.user-input-wrp-1 input:focus~.floating-label-password-1,
+.user-input-wrp-1 input:not(:focus):valid~.floating-label-password-1 {
+    top: 5px;
+    left: 15px;
+    opacity: 1;
+}
+
+.eye-1 {
+    top: 2.6em;
+    position: absolute;
+    left: 13em;
+}
+
+
+.login-flow-1 {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+    align-items: center;
+    justify-items: center;
+    width: 50%;
+    margin-top: 10em;
+    margin-left: 2em;
+
+}
+
+.text-lg {
+    font-size: 2.5em;
+    font-weight: 500;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.login-banner-1 {
+    width: 38%;
+    margin-left: -10em;
+    height: 100vh;
+}
+
+.flex-login-1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+@media only screen and (max-width: 950px) {
+    .grid-login-1 {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+    }
+
+    .login-banner-1 {
+        width: 100%;
+        height: 40%;
+        margin-top: -8em;
+        margin-left: 0;
+    }
+
+    .login-flow-1 {
+        align-items: center;
+        justify-items: center;
+
+        margin: auto;
+        margin-top: 2em;
+
+    }
+
+    .user-input-wrp-1 .floating-label-1 {
+        position: absolute;
+        pointer-events: none;
+        top: 43px;
+        left: 15px;
+        font-size: 1em;
+        transition: 0.2s ease all;
+        color: gray;
+        padding: 0 1em;
+    }
+
+    .floating-label-password-1 {
+        position: absolute;
+        pointer-events: none;
+        top: 43px;
+        left: 15px;
+        font-size: 1em;
+        transition: 0.2s ease all;
+        color: gray;
+        padding: 0 1em;
+
+    }
+
+    .user-input-wrp-1 input:focus~.floating-label-1,
+    .user-input-wrp-1 input:not(:focus):valid~.floating-label-1 {
+        left: 0px;
+    }
+
+    .user-input-wrp-1 input:focus~.floating-label-password-1,
+    .user-input-wrp-1 input:not(:focus):valid~.floating-label-password-1 {
+        left: 0px;
+    }
+
+}
+
+.footer-text{
+    margin: 1em 0em;
+}

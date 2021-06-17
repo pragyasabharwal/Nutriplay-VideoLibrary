@@ -1,0 +1,36 @@
+@import url("https://decode-ui.netlify.app/style.css");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+@import url("https://use.fontawesome.com/releases/v5.15.3/css/all.css");
+.App {
+    text-align: center;
+    
+}
+.videos-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+    
+}
+.cta {
+    display: flex;
+    justify-content: space-evenly;
+}
+.order{
+  position: relative;
+  width: 100%;
+}
+
+.liked-list{
+  display: flex;
+  flex-direction: column;
+}
+.footer{
+  display: flex;
+  flex-direction: column;
+}
+.create-btn{
+  width: 5em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.5em;
+}

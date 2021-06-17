@@ -1,0 +1,142 @@
+.search {
+    max-width: 30em;
+    width: 50%;
+    height: 0.6em;
+    font-size: 1.2em;
+    text-align: left;
+    display: block;
+    box-shadow: inset 0px 0px 2px var(--gray-fade);
+    color: black;
+    border: 1px solid var(--gray-fade);
+    padding: 0.4em;
+    padding-left: 1em;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Roboto';
+
+}
+
+.login {
+    align-self: center;
+    padding: 0 1em;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.title{
+    align-self: center;
+    font-size: 1.2em;
+    padding-right: 1em;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+::placeholder {
+    font-family: 'Roboto';
+    color: var(--gray);
+}
+
+nav {
+    border-bottom: 1px solid var(--gray-fade);
+    position: fixed;
+    background-color: white;
+    width: 100vw;
+    top: -0.0em;
+}
+
+* {
+    font-family: 'Roboto';
+}
+
+.nav {
+    position: fixed;
+    left: 0;
+    border-right: 1px solid var(--gray-fade);
+    padding-top: 1em;
+    background-color: white;
+    transition: 350ms;
+    height: 100%;
+
+
+}
+
+.nav-disable {
+    position: fixed;
+    left: -100%;
+    transition: 850ms;
+    border-right: 1px solid var(--gray-fade);
+    top: 1em;
+    background-color: white;
+
+}
+
+.nav-disable li {
+    list-style: none;
+    display: flex;
+    padding-top: 1.5em;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    padding-right: 2em;
+}
+
+.nav-disable i {
+    padding: 0em 1em;
+    font-size: 1.3em;
+}
+
+.nav-disable svg {
+    padding: 0em 1em;
+    font-size: 1.3em;
+}
+
+.nav li {
+    list-style: none;
+    display: flex;
+    padding-top: 1.5em;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    padding-right: 2em;
+}
+
+.nav i {
+    padding: 0em 1em;
+    font-size: 1.3em;
+}
+
+.nav svg {
+    padding: 0em 1em;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+hr {
+    width: 12em;
+    border: 1px solid var(--gray-fade);
+}
+
+.fa-bars {
+    padding: 1.4em 1.8em;
+    font-size: 1.3em;
+}
+
+nav img {
+    width: 5.3em;
+    height: 2em;
+    border: none;
+    margin-left: -3em;
+    border-right: 1px solid var(--gray-fade);
+    padding: 1.52em 2em;
+}
+
+.above {
+    margin-left: -4.83em;
+    margin-top: 0.62em;
+    font-size: 1.8em;
+}
+
+/* @media only screen and (max-width: 600px) {
+    .nav-toggle-display {
+      visibility: hidden;
+    }
+  } */

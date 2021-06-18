@@ -1,19 +1,28 @@
-import "./App.css";
-import { LikedVideos } from "./components/LikedVideos";
-import { Nav } from "./components/nav/Nav";
-import { WatchLater } from "./components/watchLater/WatchLater";
-import { Route, Routes } from "react-router-dom";
-import { Home } from "./components/home/Home";
-import { VideoPlay } from "./components/videoplay/VideoPlay";
-import { SavedVideos } from "./components/SavedVideos";
-import { History } from "./components/history/History";
-import { Library } from "./components/library/Library";
-import { Playlist } from "./components/playlist/Playlist";
-import { Login } from "./components/auth/login/Login"
-import { Signup } from "./components/auth/signup/Signup";
-import { PrivateRoute } from "./components/auth/PrivateRoute"
+import './App.css'
+import { LikedVideos } from './components/LikedVideos'
+import { Nav } from './components/nav/Nav'
+import { WatchLater } from './components/watchLater/WatchLater'
+import { Route, Routes } from 'react-router-dom'
+import { Home } from './components/home/Home'
+import { VideoPlay } from './components/videoplay/VideoPlay'
+import { SavedVideos } from './components/SavedVideos'
+import { History } from './components/history/History'
+import { Library } from './components/library/Library'
+import { Playlist } from './components/playlist/Playlist'
+import { Login } from './components/auth/login/Login'
+import { Signup } from './components/auth/signup/Signup'
+import { PrivateRoute } from './components/auth/PrivateRoute'
+import { useEffect } from 'react'
+import { getPlaylistData } from './services/videosServices'
+import { useDataContext } from './components/context/DataContext'
 
 function App() {
+  const { state, dispatch } = useDataContext()
+
+  useEffect(() => {
+    getPlaylistData(dispatch)
+  }, [])
+
   return (
     <div className="App">
       <Nav />
@@ -27,10 +36,10 @@ function App() {
         <Route path="/videos/:videoId" element={<VideoPlay />} />
         <PrivateRoute path="/history" element={<History />} />
         <PrivateRoute path="/library" element={<Library />} />
-        <Route path="/playlists/:name" element = {<Playlist />} />
+        <Route path="/playlists/:name" element={<Playlist />} />
       </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

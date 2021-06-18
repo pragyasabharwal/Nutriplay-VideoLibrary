@@ -1,13 +1,13 @@
-import "./Home.css";
-import { useDataContext } from "../context/DataContext";
-import { Link } from "react-router-dom";
-import ClipLoader from "react-spinners/ClipLoader";
-import { useAuth } from "../context/AuthProvider";
-import { LoginModal } from "../modal/LoginModal";
+import './Home.css'
+import { useDataContext } from '../context/DataContext'
+import { Link } from 'react-router-dom'
+import ClipLoader from 'react-spinners/ClipLoader'
+import { useAuth } from '../context/AuthProvider'
+import { LoginModal } from '../modal/LoginModal'
 
 export function Home() {
-  const { login } = useAuth();
-  const { setModal, modal, dispatch, state } = useDataContext();
+  const { login } = useAuth()
+  const { setModal, modal, dispatch, state } = useDataContext()
 
   return (
     <div>
@@ -16,11 +16,11 @@ export function Home() {
         className="video-listing-1"
         style={
           state.displayNav
-            ? { marginLeft: "-10em", transition: "350ms" }
-            : { marginLeft: "unset", transition: "350ms" }
+            ? { marginLeft: '-10em', transition: '350ms' }
+            : { marginLeft: 'unset', transition: '350ms' }
         }
       >
-        {state.videos.length > 0  ? (
+        {state.videos.length > 0 ? (
           state.videos?.map((item) => (
             <div className="video-style" key={item._id}>
               <Link to={`videos/${item._id}`}>
@@ -28,7 +28,7 @@ export function Home() {
                   <img
                     src={item.thumbnail}
                     className="thumbnail"
-                    onClick={() => dispatch({ type: "TOGGLE_NAV_2" })}
+                    onClick={() => dispatch({ type: 'TOGGLE_NAV_2' })}
                   ></img>
                 </div>
               </Link>
@@ -48,7 +48,7 @@ export function Home() {
                 <span
                   className="ellipsis"
                   onClick={() =>
-                    dispatch({ type: "TOGGLE_ACTIONS", payload: item })
+                    dispatch({ type: 'TOGGLE_ACTIONS', payload: item })
                   }
                 >
                   <i class="fas fa-ellipsis-v"></i>
@@ -58,15 +58,15 @@ export function Home() {
                 className="cta"
                 style={
                   state.flag.includes(item)
-                    ? { display: "flex" }
-                    : { display: "none" }
+                    ? { display: 'flex' }
+                    : { display: 'none' }
                 }
               >
                 <span
                   onClick={() => {
                     login
-                      ? dispatch({ type: "ADD_TO_WATCH_LATER", payload: item })
-                      : setModal(true);
+                      ? dispatch({ type: 'ADD_TO_WATCH_LATER', payload: item })
+                      : setModal(true)
                   }}
                 >
                   Save to Watch Later
@@ -76,10 +76,10 @@ export function Home() {
           ))
         ) : (
           <div className="spinner">
-            <ClipLoader color={"black"} size={50} />
+            <ClipLoader color={'black'} size={50} />
           </div>
         )}
       </div>
     </div>
-  );
+  )
 }

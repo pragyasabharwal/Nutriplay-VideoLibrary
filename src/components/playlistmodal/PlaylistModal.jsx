@@ -1,12 +1,17 @@
-import { useState } from "react";
-import { useDataContext } from "../context/DataContext";
-import "./PlaylistModal.css";
+import { useState } from 'react'
+import { useDataContext } from '../context/DataContext'
+import './PlaylistModal.css'
+import {
+  addNewPlaylist,
+  addToExistingPlaylist,
+  removeFromExistingPlaylist,
+} from '../../services/videosServices'
 
 export function PlaylistModal({ item }) {
-  const { dispatch, state } = useDataContext();
-  const [playlist, setPlaylist] = useState("");
+  const { dispatch, state } = useDataContext()
+  const [playlist, setPlaylist] = useState('')
   const [playlistArr, setPlaylistArr] = useState([])
-  console.log ('state being changed is..', state.playObj);
+  console.log('state being changed is..', state.playObj)
 
   return (
     <div className="modal">
@@ -15,7 +20,7 @@ export function PlaylistModal({ item }) {
         <span
           class="modal-close padding-2"
           onClick={() => {
-            dispatch({ type: "CLOSE_MODAL" });
+            dispatch({ type: 'CLOSE_MODAL' })
           }}
         >
           <i class="fas fa-times"></i>
@@ -27,7 +32,7 @@ export function PlaylistModal({ item }) {
             type="checkbox"
             checked={state.watchLater.includes(item) ? true : false}
             onClick={() => {
-              dispatch({ type: "ADD_TO_WATCH_LATER", payload: item });
+              dispatch({ type: 'ADD_TO_WATCH_LATER', payload: item })
             }}
           ></input>
           Watch Later
@@ -35,16 +40,18 @@ export function PlaylistModal({ item }) {
         {state.playObj.map((items) => {
           return (
             <div className="check-list">
-              <input type="checkbox"
-              checked={items.videos.includes(item)}
-              onClick={() => {
-             dispatch({ type: "ADD_TO_EXISTING_PLAYLIST", payload: {item, playlist: items.name} });
-              }}
-
-               />
-               {items.name}
+              <input
+                type="checkbox"
+                checked={items.videos.find((prev) => prev === item.youtubeId)}
+                onClick={() => {
+                  items.videos.find((prev) => prev === item.youtubeId)
+                    ? removeFromExistingPlaylist(dispatch, item, items.name)
+                    : addToExistingPlaylist(dispatch, item, items.name)
+                }}
+              />
+              {items.name}
             </div>
-          );
+          )
         })}
       </div>
       <div class="padding-1 footer">
@@ -54,15 +61,15 @@ export function PlaylistModal({ item }) {
             placeholder={`+ Create new playlist`}
             value={playlist}
             onChange={(e) => {
-              setPlaylist(e.target.value);
+              setPlaylist(e.target.value)
             }}
           ></input>
           <button
-            onClick={() =>{
-              setPlaylist("")
-              setPlaylistArr((prev)=> prev.concat(playlist))
-              dispatch({ type: "ADD_TO_PLAYLIST", payload: { playlist, item } })}
-            }
+            onClick={() => {
+              setPlaylist('')
+              setPlaylistArr((prev) => prev.concat(playlist))
+              addNewPlaylist(dispatch, item, playlist)
+            }}
             className="button-primary-1 create"
           >
             +
@@ -70,5 +77,5 @@ export function PlaylistModal({ item }) {
         </span>
       </div>
     </div>
-  );
+  )
 }

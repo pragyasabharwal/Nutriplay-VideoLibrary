@@ -63,7 +63,7 @@ export const Library = () => {
                 {item.videos.map((item) => (
                   <div>
                     <YouTube
-                      videoId={item.youtubeId}
+                      videoId={item}
                       className="videos-history-library"
                     />
                   </div>

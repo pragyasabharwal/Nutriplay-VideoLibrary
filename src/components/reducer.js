@@ -65,16 +65,20 @@ export const reducer = (state, action) => {
         ...state,
         saved: state.saved.filter((prev) => prev?._id !== action.payload?._id),
       }
-    case 'ADD_TO_PLAYLIST':
+    case 'SET_PLAYLIST_DATA':
+      return {
+        ...state,
+        playObj: state.playObj.concat(action.payload),
+      }
+    case 'ADD_NEW_PLAYLIST':
       return {
         ...state,
         playObj: state.playObj.concat({
-          id: uuid(),
           name: action.payload.playlist,
           videos: [action.payload.item],
         }),
       }
-    case 'ADD_TO_EXISTING_PLAYLIST':
+    case 'ADD_OR_REMOVE_FROM_EXISTING_PLAYLIST':
       return {
         ...state,
         playObj: state.playObj.map((item) => {

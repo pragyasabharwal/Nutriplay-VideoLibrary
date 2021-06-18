@@ -38,7 +38,9 @@ export function DataProvider({ children }) {
   }
 
   return (
-    <DataContext.Provider value={{ dispatch, state, modal, setModal, data, setData }}>
+    <DataContext.Provider
+      value={{ dispatch, state, modal, setModal, data, setData }}
+    >
       {children}
     </DataContext.Provider>
   )
